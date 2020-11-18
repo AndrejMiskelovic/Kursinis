@@ -33,9 +33,22 @@ namespace Utilities
             {
                 KNN();
             }
+            else if (comboBox1.SelectedItem == "Simple")
+            {
+                SimpleA();
+            }
             
             
             
+        }
+        private void SimpleA()
+        {
+            SimpleAp test = new SimpleAp();
+            List<Utility> Results = test.SimpleApproachAlgorithm((float)(numericUpDown1.Value), (float)(numericUpDown2.Value), (float)(numericUpDown3.Value), (float)(numericUpDown5.Value));
+            foreach (var item in Results)
+            {
+                lbResults.Items.Add(item.country + " Water: " + item.water_m3 + " Gas: " + item.gas_kWh + " Electricity: " + item.electricity_kWh + " Average: " + item.average);
+            }
         }
         private void NaiveB()
         {

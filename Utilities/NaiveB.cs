@@ -9,22 +9,23 @@ namespace Utilities
 {
     class NaiveB
     {
-        static string[] classes = new string[] { "Cheap", "Average", "Expansive" };
+        static string[] classes = new string[] { "Cheap", "Average", "Expensive" };
         static double[] water = new double[] { 0.6, 1.1, 1.5, 2, 3 };
         static double[] average = new double[] { 49, 89, 139, 189, 300 };
         static double[] gas = new double[] { 0.01, 0.025, 0.04, 0.08, 0.15 };
         static double[] electricity = new double[] { 0.05, 0.12, 0.22, 0.3, 0.4 };
         List<Utility> Cheap = new List<Utility>();
         List<Utility> Average = new List<Utility>();
-        List<Utility> Expansive = new List<Utility>();
+        List<Utility> Expensive = new List<Utility>();
         List<Utility> Utilities = new List<Utility>();
 
         public List<Utility> NaiveBAlgorithm(float waterinput, float gasinput, float electricityinput, float averageinput)
         {
-            Class();
+            Classification classification = new Classification();
+            classification.Class(Utilities, Cheap, Average, Expensive);
             float dCheap = (float)Cheap.Count / Utilities.Count;
             float dAverage = (float)Average.Count / Utilities.Count;
-            float dExpansive = (float)Expansive.Count / Utilities.Count;
+            float dExpansive = (float)Expensive.Count / Utilities.Count;
 
             float PtCheap = 0;
             float PtAverage = 0;
@@ -79,12 +80,12 @@ namespace Utilities
                         else if (waterinput >= water[4] && waterinput < 1501)
                             PtAverage += temporary[5, 1];
 
-                        temporary[0, 2] = (float)NaiveBCalculationWater(Expansive, 0, water[0]) / Expansive.Count;
-                        temporary[1, 2] = (float)NaiveBCalculationWater(Expansive, water[0], water[1]) / Expansive.Count;
-                        temporary[2, 2] = (float)NaiveBCalculationWater(Expansive, water[1], water[2]) / Expansive.Count;
-                        temporary[3, 2] = (float)NaiveBCalculationWater(Expansive, water[2], water[3]) / Expansive.Count;
-                        temporary[4, 2] = (float)NaiveBCalculationWater(Expansive, water[3], water[4]) / Expansive.Count;
-                        temporary[5, 2] = (float)NaiveBCalculationWater(Expansive, water[4], 1501) / Expansive.Count;
+                        temporary[0, 2] = (float)NaiveBCalculationWater(Expensive, 0, water[0]) / Expensive.Count;
+                        temporary[1, 2] = (float)NaiveBCalculationWater(Expensive, water[0], water[1]) / Expensive.Count;
+                        temporary[2, 2] = (float)NaiveBCalculationWater(Expensive, water[1], water[2]) / Expensive.Count;
+                        temporary[3, 2] = (float)NaiveBCalculationWater(Expensive, water[2], water[3]) / Expensive.Count;
+                        temporary[4, 2] = (float)NaiveBCalculationWater(Expensive, water[3], water[4]) / Expensive.Count;
+                        temporary[5, 2] = (float)NaiveBCalculationWater(Expensive, water[4], 1501) / Expensive.Count;
 
                         if (waterinput < water[0])
                             PtExpansive += temporary[0, 2];
@@ -146,12 +147,12 @@ namespace Utilities
                         else if (gasinput >= gas[4] && gasinput < 1501)
                             PtAverage += temporary[5, 1];
 
-                        temporary[0, 2] = (float)NaiveBCalculationGas(Expansive, 0, gas[0]) / Expansive.Count;
-                        temporary[1, 2] = (float)NaiveBCalculationGas(Expansive, gas[0], gas[1]) / Expansive.Count;
-                        temporary[2, 2] = (float)NaiveBCalculationGas(Expansive, gas[1], gas[2]) / Expansive.Count;
-                        temporary[3, 2] = (float)NaiveBCalculationGas(Expansive, gas[2], gas[3]) / Expansive.Count;
-                        temporary[4, 2] = (float)NaiveBCalculationGas(Expansive, gas[3], gas[4]) / Expansive.Count;
-                        temporary[5, 2] = (float)NaiveBCalculationGas(Expansive, gas[4], 1501) / Expansive.Count;
+                        temporary[0, 2] = (float)NaiveBCalculationGas(Expensive, 0, gas[0]) / Expensive.Count;
+                        temporary[1, 2] = (float)NaiveBCalculationGas(Expensive, gas[0], gas[1]) / Expensive.Count;
+                        temporary[2, 2] = (float)NaiveBCalculationGas(Expensive, gas[1], gas[2]) / Expensive.Count;
+                        temporary[3, 2] = (float)NaiveBCalculationGas(Expensive, gas[2], gas[3]) / Expensive.Count;
+                        temporary[4, 2] = (float)NaiveBCalculationGas(Expensive, gas[3], gas[4]) / Expensive.Count;
+                        temporary[5, 2] = (float)NaiveBCalculationGas(Expensive, gas[4], 1501) / Expensive.Count;
 
                         if (gasinput < gas[0])
                             PtExpansive += temporary[0, 2];
@@ -213,12 +214,12 @@ namespace Utilities
                         else if (electricityinput >= electricity[4] && electricityinput < 1501)
                             PtAverage += temporary[5, 1];
 
-                        temporary[0, 2] = (float)NaiveBCalculationElectricity(Expansive, 0, electricity[0]) / Expansive.Count;
-                        temporary[1, 2] = (float)NaiveBCalculationElectricity(Expansive, electricity[0], electricity[1]) / Expansive.Count;
-                        temporary[2, 2] = (float)NaiveBCalculationElectricity(Expansive, electricity[1], electricity[2]) / Expansive.Count;
-                        temporary[3, 2] = (float)NaiveBCalculationElectricity(Expansive, electricity[2], electricity[3]) / Expansive.Count;
-                        temporary[4, 2] = (float)NaiveBCalculationElectricity(Expansive, electricity[3], electricity[4]) / Expansive.Count;
-                        temporary[5, 2] = (float)NaiveBCalculationElectricity(Expansive, electricity[4], 1501) / Expansive.Count;
+                        temporary[0, 2] = (float)NaiveBCalculationElectricity(Expensive, 0, electricity[0]) / Expensive.Count;
+                        temporary[1, 2] = (float)NaiveBCalculationElectricity(Expensive, electricity[0], electricity[1]) / Expensive.Count;
+                        temporary[2, 2] = (float)NaiveBCalculationElectricity(Expensive, electricity[1], electricity[2]) / Expensive.Count;
+                        temporary[3, 2] = (float)NaiveBCalculationElectricity(Expensive, electricity[2], electricity[3]) / Expensive.Count;
+                        temporary[4, 2] = (float)NaiveBCalculationElectricity(Expensive, electricity[3], electricity[4]) / Expensive.Count;
+                        temporary[5, 2] = (float)NaiveBCalculationElectricity(Expensive, electricity[4], 1501) / Expensive.Count;
 
                         if (electricityinput < electricity[0])
                             PtExpansive += temporary[0, 2];
@@ -278,12 +279,12 @@ namespace Utilities
                         else if (averageinput >= average[4] && averageinput < 1501)
                             PtAverage += temporary[5, 1];
 
-                        temporary[0, 2] = (float)NaiveBCalculationAverage(Expansive, 0, average[0]) / Expansive.Count;
-                        temporary[1, 2] = (float)NaiveBCalculationAverage(Expansive, average[0], average[1]) / Expansive.Count;
-                        temporary[2, 2] = (float)NaiveBCalculationAverage(Expansive, average[1], average[2]) / Expansive.Count;
-                        temporary[3, 2] = (float)NaiveBCalculationAverage(Expansive, average[2], average[3]) / Expansive.Count;
-                        temporary[4, 2] = (float)NaiveBCalculationAverage(Expansive, average[3], average[4]) / Expansive.Count;
-                        temporary[5, 2] = (float)NaiveBCalculationAverage(Expansive, average[4], 1501) / Expansive.Count;
+                        temporary[0, 2] = (float)NaiveBCalculationAverage(Expensive, 0, average[0]) / Expensive.Count;
+                        temporary[1, 2] = (float)NaiveBCalculationAverage(Expensive, average[0], average[1]) / Expensive.Count;
+                        temporary[2, 2] = (float)NaiveBCalculationAverage(Expensive, average[1], average[2]) / Expensive.Count;
+                        temporary[3, 2] = (float)NaiveBCalculationAverage(Expensive, average[2], average[3]) / Expensive.Count;
+                        temporary[4, 2] = (float)NaiveBCalculationAverage(Expensive, average[3], average[4]) / Expensive.Count;
+                        temporary[5, 2] = (float)NaiveBCalculationAverage(Expensive, average[4], 1501) / Expensive.Count;
 
                         if (averageinput < average[0])
                             PtExpansive += temporary[0, 2];
@@ -299,190 +300,88 @@ namespace Utilities
                             PtExpansive += temporary[5, 2];
                     }
                 }
-                
-
             }
-                PtCheap = (float)PtCheap / 4;
-                PtAverage = (float)PtAverage / 4;
-                PtExpansive = (float)PtExpansive / 4;
+            PtCheap = (float)PtCheap / 4;
+            PtAverage = (float)PtAverage / 4;
+            PtExpansive = (float)PtExpansive / 4;
 
-                float likeHoudCheap = PtCheap * dCheap;
-                float likeHoudAverage = PtAverage * dAverage;
-                float likeHoudExpansive = PtExpansive * dExpansive;
+            float likeHoudCheap = PtCheap * dCheap;
+            float likeHoudAverage = PtAverage * dAverage;
+            float likeHoudExpansive = PtExpansive * dExpansive;
 
-                float Pt = likeHoudCheap + likeHoudAverage + likeHoudExpansive;
+            float Pt = likeHoudCheap + likeHoudAverage + likeHoudExpansive;
 
-                float PfinalCheap = ((float)likeHoudCheap / Pt)*100;
-                float PfinalAverage = ((float)likeHoudAverage / Pt)*100;
-                float PfinalExpansive = ((float)likeHoudExpansive / Pt)*100;
+            float PfinalCheap = ((float)likeHoudCheap / Pt) * 100;
+            float PfinalAverage = ((float)likeHoudAverage / Pt) * 100;
+            float PfinalExpansive = ((float)likeHoudExpansive / Pt) * 100;
 
-                if (PfinalCheap > PfinalAverage && PfinalCheap > PfinalExpansive)
-                {
-                    return Cheap;
-                }
-                else if (PfinalAverage > PfinalCheap && PfinalAverage > PfinalExpansive)
-                {
-                    return Average;
-                }
-                else //(PfinalExpansive > PfinalCheap && PfinalExpansive > PfinalAverage)
-                {
-                    return Expansive;
-                }
+            if (waterinput == 0 && gasinput == 0 && electricityinput == 0 && averageinput == 0)
+            {
+                return Utilities;
+            }
+            else if (PfinalCheap > PfinalAverage && PfinalCheap > PfinalExpansive)
+            {
+                return Cheap;
+            }
+            else if (PfinalAverage > PfinalCheap && PfinalAverage > PfinalExpansive)
+            {
+                return Average;
+            }
+            else //(PfinalExpansive > PfinalCheap && PfinalExpansive > PfinalAverage)
+            {
+                return Expensive;
+            }
 
-               // return "asd";
-            
+            // return "asd";
+
         }
-            public int NaiveBCalculationWater(List<Utility> listU, double range1, double range2)
+        public int NaiveBCalculationWater(List<Utility> listU, double range1, double range2)
+        {
+            int cnt = 0;
+            foreach (var item in listU)
             {
-                int cnt = 0;
-                foreach (var item in listU)
+                if (item.water_m3 >= range1 && item.water_m3 < range2)
                 {
-                    if (item.water_m3 >= range1 && item.water_m3 < range2)
-                    {
-                        cnt++;
-                    }
-                }
-                return cnt;
-            }
-            public int NaiveBCalculationGas(List<Utility> listU, double range1, double range2)
-            {
-                int cnt = 0;
-                foreach (var item in listU)
-                {
-                    if (item.gas_kWh >= range1 && item.gas_kWh < range2)
-                    {
-                        cnt++;
-                    }
-                }
-                return cnt;
-            }
-            public int NaiveBCalculationElectricity(List<Utility> listU, double range1, double range2)
-            {
-                int cnt = 0;
-                foreach (var item in listU)
-                {
-                    if (item.electricity_kWh >= range1 && item.electricity_kWh < range2)
-                    {
-                        cnt++;
-                    }
-                }
-                return cnt;
-            }
-            public int NaiveBCalculationAverage(List<Utility> listU, double range1, double range2)
-            {
-                int cnt = 0;
-                foreach (var item in listU)
-                {
-                    if (item.average >= range1 && item.average < range2)
-                    {
-                        cnt++;
-                    }
-                }
-                return cnt;
-            }
-            public void Class()
-            {
-                DBConnection dBConnection = new DBConnection();
-                dBConnection.Contries(Utilities);
-
-                foreach (var item in Utilities)
-                {
-                    char cWater;
-                    char cGas;
-                    char cAverage;
-                    char cElectricity;
-                    #region Water
-                    if (item.water_m3 < water[1])
-                    {
-                        cWater = 'c';
-                    }
-                    else if (item.water_m3 >= water[1] && item.water_m3 < water[3])
-                    {
-                        cWater = 'a';
-                    }
-                    else
-                    {
-                        cWater = 'e';
-                    }
-                    #endregion
-                    #region GAS
-                    if (item.gas_kWh < gas[1])
-                    {
-                        cGas = 'c';
-                    }
-                    else if (item.gas_kWh >= gas[1] && item.gas_kWh < gas[3])
-                    {
-                        cGas = 'a';
-                    }
-                    else
-                    {
-                        cGas = 'e';
-                    }
-                    #endregion
-                    #region Electricity
-                    if (item.electricity_kWh < electricity[1])
-                    {
-                        cElectricity = 'c';
-                    }
-                    else if (item.electricity_kWh >= electricity[1] && item.electricity_kWh < electricity[3])
-                    {
-                        cElectricity = 'a';
-                    }
-                    else
-                    {
-                        cElectricity = 'e';
-                    }
-                    #endregion
-                    #region Average
-                    if (item.average < average[1])
-                    {
-                        cAverage = 'c';
-                    }
-                    else if (item.average >= average[1] && item.average < average[3])
-                    {
-                        cAverage = 'a';
-                    }
-                    else
-                    {
-                        cAverage = 'e';
-                    }
-                    #endregion
-                    string res = Convert.ToString(cWater) + Convert.ToString(cGas) + Convert.ToString(cElectricity) + Convert.ToString(cAverage);
-                    #region Classification
-                    if (res.Split('c').Length - 1 >= 3)
-                    {
-                        Cheap.Add(item);
-                    }
-                    else if (res.Split('a').Length - 1 >= 3)
-                    {
-                        Average.Add(item);
-                    }
-                    else if (res.Split('e').Length - 1 >= 3)
-                    {
-                        Expansive.Add(item);
-                    }
-                    else if ((res.Split('c').Length - 1 == 2 && res.Split('e').Length - 1 == 2) || res.Split('c').Length - 1 == 2 && res.Split('a').Length - 1 == 2)
-                    {
-                        Average.Add(item);
-                    }
-                    else if (res.Split('a').Length - 1 == 2 && res.Split('e').Length - 1 == 2)
-                    {
-                        Expansive.Add(item);
-                    }
-                    else if (res.Split('c').Length - 1 == 2)
-                    {
-                        Cheap.Add(item);
-                    }
-                    else if (res.Split('a').Length - 1 == 2)
-                    {
-                        Average.Add(item);
-                    }
-                    else if (res.Split('e').Length - 1 == 2)
-                    {
-                        Expansive.Add(item);
-                    }
-                    #endregion
+                    cnt++;
                 }
             }
+            return cnt;
         }
+        public int NaiveBCalculationGas(List<Utility> listU, double range1, double range2)
+        {
+            int cnt = 0;
+            foreach (var item in listU)
+            {
+                if (item.gas_kWh >= range1 && item.gas_kWh < range2)
+                {
+                    cnt++;
+                }
+            }
+            return cnt;
+        }
+        public int NaiveBCalculationElectricity(List<Utility> listU, double range1, double range2)
+        {
+            int cnt = 0;
+            foreach (var item in listU)
+            {
+                if (item.electricity_kWh >= range1 && item.electricity_kWh < range2)
+                {
+                    cnt++;
+                }
+            }
+            return cnt;
+        }
+        public int NaiveBCalculationAverage(List<Utility> listU, double range1, double range2)
+        {
+            int cnt = 0;
+            foreach (var item in listU)
+            {
+                if (item.average >= range1 && item.average < range2)
+                {
+                    cnt++;
+                }
+            }
+            return cnt;
+        }
+    }
     }
