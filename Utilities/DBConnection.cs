@@ -9,7 +9,7 @@ namespace Utilities
 {
     class DBConnection
     {
-        SqlConnection con = new SqlConnection("Data Source = (LocalDB)\\.;Initial Catalog = Country; Integrated Security = True");
+        SqlConnection con = new SqlConnection("Data Source = DESKTOP-ARQFBOB;Initial Catalog = Country; Integrated Security = True");
 
         public List<Utility> Contries(List<Utility> utility)
         {

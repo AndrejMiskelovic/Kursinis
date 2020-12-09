@@ -12,10 +12,6 @@ namespace Utilities
         static double[] average = new double[] { 49, 89, 139, 189, 300 };
         static double[] gas = new double[] { 0.01, 0.025, 0.04, 0.08, 0.15 };
         static double[] electricity = new double[] { 0.05, 0.12, 0.22, 0.3, 0.4 };
-        //List<Utility> Cheap = new List<Utility>();
-        //List<Utility> Average = new List<Utility>();
-        //List<Utility> Expansive = new List<Utility>();
-        //List<Utility> Utilities = new List<Utility>();
         public void Class(List<Utility> Utilities, List<Utility> Cheap, List<Utility> Average, List<Utility> Expensive)
         {
             DBConnection dBConnection = new DBConnection();
